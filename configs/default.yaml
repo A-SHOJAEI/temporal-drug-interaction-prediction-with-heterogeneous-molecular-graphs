@@ -1,0 +1,107 @@
+# Default configuration for Temporal Drug Interaction Prediction
+
+model:
+  hidden_dim: 256
+  num_layers: 4
+  num_heads: 8
+  dropout: 0.1
+  temporal_attention_dim: 128
+  metabolite_pathway_dim: 64
+
+  # Heterogeneous graph settings
+  node_types:
+    - "drug"
+    - "metabolite"
+    - "target"
+  edge_types:
+    - "drug_metabolite"
+    - "metabolite_drug"
+    - "drug_target"
+    - "target_drug"
+    - "metabolite_target"
+    - "target_metabolite"
+    - "drug_drug"
+
+  # Temporal modeling
+  time_encoding_dim: 32
+  max_time_steps: 100
+  temporal_decay_rate: 0.95
+
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  num_epochs: 100
+  early_stopping_patience: 15
+  gradient_clip_norm: 1.0
+
+  # Loss function weights
+  interaction_loss_weight: 1.0
+  toxicity_loss_weight: 0.5
+  metabolite_pathway_loss_weight: 0.3
+  temporal_consistency_weight: 0.2
+
+  # Optimization
+  optimizer: "adamw"
+  scheduler: "cosine"
+  warmup_steps: 1000
+
+  # Regularization
+  use_dropout: true
+  use_batch_norm: true
+  label_smoothing: 0.1
+
+data:
+  # Dataset paths (will be set by data loader)
+  tox21_path: null
+  ogbl_ppa_path: null
+  custom_interaction_data: null
+
+  # Data splitting
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+  # Preprocessing
+  max_molecules_per_batch: 32
+  molecular_feature_dim: 265
+  use_edge_features: true
+  normalize_features: true
+
+  # Data augmentation
+  random_walk_length: 10
+  num_random_walks: 20
+  temporal_jitter_std: 0.1
+
+experiment:
+  experiment_name: "temporal_drug_interaction_prediction"
+  run_name: null
+  log_dir: "logs"
+  checkpoint_dir: "checkpoints"
+
+  # MLflow settings
+  use_mlflow: true
+  mlflow_tracking_uri: null
+  mlflow_experiment_name: "drug_interaction_prediction"
+
+  # Logging
+  log_level: "INFO"
+  log_frequency: 100
+  save_checkpoint_frequency: 5
+
+  # Evaluation
+  eval_frequency: 1
+  save_predictions: true
+  compute_attention_weights: true
+
+# Device and reproducibility
+device: "auto"
+seed: 42
+num_workers: 4
+
+# Target metrics from specification
+target_metrics:
+  interaction_auroc: 0.88
+  early_detection_recall_at_k: 0.75
+  metabolite_pathway_accuracy: 0.82
+  cross_task_transfer_improvement: 0.15
