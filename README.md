@@ -239,6 +239,19 @@ def predict_interaction(drug1: str, drug2: str):
     return {"interaction_probability": model.predict(drug1, drug2)}
 ```
 
+## Citation
+
+If you use this code in your research, please cite:
+
+```bibtex
+@software{temporal_drug_interaction_prediction_2026,
+  title={Temporal Drug Interaction Prediction with Heterogeneous Molecular Graphs},
+  author={Alireza Shojaei},
+  year={2026},
+  url={https://github.com/A-SHOJAEI/temporal-drug-interaction-prediction-with-heterogeneous-molecular-graphs}
+}
+```
+
 ## License
 
 MIT License - Copyright (c) 2026 Alireza Shojaei. See [LICENSE](LICENSE) for details.
