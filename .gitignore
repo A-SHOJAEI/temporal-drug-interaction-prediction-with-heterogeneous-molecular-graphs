@@ -179,3 +179,17 @@ attention_analysis/
 
 # Jupyter notebook outputs
 **/outputs/
+
+# Auto-added by publisher
+# Training artifacts (auto-added by publisher)
+*.onnx
+*.bin
+*.safetensors
+mlflow.db
+data/*.arrow
+data/*.parquet
+data/*.h5
+data/*.hdf5
+data/raw/
+data/processed/
+.venv/
