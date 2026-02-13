@@ -141,6 +141,7 @@ tmp/
 # Data files (large datasets)
 data/
 datasets/
+ogb_data/
 *.csv
 *.h5
 *.hdf5
